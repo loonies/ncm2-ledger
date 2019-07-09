@@ -1,0 +1,64 @@
+Ncm2 Ledger
+===========
+
+Description
+-----------
+
+Ncm2 completion source for Ledger CLI (http://ledger-cli.org) based
+applications.
+
+Installation
+------------
+
+Requirements:
+
+ - NeoVim
+ - Plugin Ncm2 (https://github.com/ncm2/ncm2)
+
+Installing:
+
+Consult NeoVim documentation on installing packages.
+Type `:help packages` in NeoVim for help.
+
+
+Documentation
+-------------
+
+The Ledger Ncm2 source will provide completion for accounts from a
+Ledger journal file.
+
+By default `ledger` command with corresponding arguments is used.
+Redefine the command as a string, or an array of CLI arguments.
+For example, if you are using `hledger` either will work:
+
+    let g:ncm2_ledger_cmd_accounts = 'hledger accounts'
+    let g:ncm2_ledger_cmd_accounts = ['hledger', 'accounts']
+
+Settings
+
+    g:ncm2_ledger_cmd_accounts
+        Defines a command for retrieving accounts
+        Default: ['ledger', 'accounts']
+
+
+Contributing
+------------
+
+Open an issue or send a pull request on the Github
+(http://github.com/loonies/ncm2-ledger).
+
+
+Authors
+-------
+
+Maintainer:
+
+ - Miodrag Tokić
+
+
+Copyright
+---------
+
+Copyright (C) 2019 Miodrag Tokić.
+
+Released under the MIT License. See the LICENSE file for details.
