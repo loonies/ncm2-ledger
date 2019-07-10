@@ -15,6 +15,7 @@ Requirements:
 
  - NeoVim
  - Plugin Ncm2 (https://github.com/ncm2/ncm2)
+ - Ledger based tool (ledger, hledger, etc.)
 
 Installing:
 
