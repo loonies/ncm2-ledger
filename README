@@ -5,7 +5,7 @@ Description
 -----------
 
 Ncm2 completion source for Ledger CLI (http://ledger-cli.org) based
-applications.
+tools.
 
 
 Installation
@@ -28,7 +28,7 @@ Documentation
 The Ledger Ncm2 source will provide completion for accounts from a
 Ledger journal file.
 
-By default `ledger` command with corresponding arguments is used.
+By default, `ledger` command with corresponding arguments is used.
 Redefine the command as a string, or an array of CLI arguments.
 For example, if you are using `hledger` either will work:
 
