@@ -15,7 +15,9 @@ let g:ncm2_ledger#source = extend(get(g:, 'ncm2_ledger#source', {}), {
     \ 'scope': ['ledger'],
     \ 'ready': 0,
     \ 'priority': 9,
-    \ 'word_pattern': '(?<=^ {4})\w[: \w]*',
+    \ 'complete_length': -1,
+    \ 'complete_pattern': ['^ {4}'],
+    \ 'word_pattern': '\S+',
     \ 'on_warmup': 'ncm2_ledger#on_warmup',
     \ 'on_complete': 'ncm2_ledger#on_complete',
 \ }, 'keep')
