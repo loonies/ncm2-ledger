@@ -38,7 +38,7 @@ class Source(Ncm2Source):
             )
             outs, errs = proc.communicate(timeout=Source.PROC_TIMEOUT)
 
-            candidates = outs.decode('utf-8').split()
+            candidates = outs.decode('utf-8').splitlines()
             candidates = self.matches_formalize(ctx, candidates)
 
             if candidates:
