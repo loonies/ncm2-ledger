@@ -10,20 +10,28 @@ from ncm2 import getLogger
 logger = getLogger(__name__)
 
 class Source(Ncm2Source):
-    LEDGER_COMMAND = ['ledger', 'accounts']
     PROC_TIMEOUT = 5
+    DEFUALT_COMMANDS = {
+        'accounts': ['ledger', 'accounts'],
+        'tags': ['ledger', 'tags'],
+        'payees': ['ledger', 'payees'],
+        'commodities': ['ledger', 'commodities']
+    }
 
-    def __init__(self, nvim):
+    def __init__(self, nvim, name):
         super().__init__(nvim)
 
+        self.name = name
+        self.command = None
         self.candidates = []
 
         try:
-            self.ledger_command = self.nvim.eval('g:ncm2_ledger_cmd_accounts')
+            setting = 'g:ncm2_ledger_cmd_' + name
+            self.command = self.nvim.eval(setting)
         except NvimError:
-            self.ledger_command = Source.LEDGER_COMMAND
+            self.command = Source.DEFUALT_COMMANDS[name]
 
-        logger.debug('command is: %s', self.ledger_command)
+        logger.debug('"%s" command is: %s', name, self.command)
 
     def on_complete(self, ctx):
         base = ctx['base']
@@ -31,7 +39,7 @@ class Source(Ncm2Source):
 
         try:
             proc = Popen(
-                args=self.ledger_command,
+                args=self.command,
                 stdin=subprocess.PIPE,
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE
@@ -43,15 +51,21 @@ class Source(Ncm2Source):
 
             if candidates:
                 self.candidates = candidates
-                logger.info('Found %s completion candidates', len(self.matches))
+                logger.info('Found %s "%s" completion candidates',
+                    len(self.candidates), self.name
+                )
         except TimeoutExpired as err:
             proc.kill()
-            logger.exception('Error collecting matches')
+            logger.exception('Error collecting "%s" matches', self.name)
         except Exception as err:
-            logger.exception('Error collecting matches')
+            logger.exception('Error collecting "%s" matches', self.name)
 
         matches = [candidate for candidate in self.candidates if matcher(base, candidate)]
+        logger.info('Found %s "%s" completion matches',
+            len(matches), self.name
+        )
         self.complete(ctx, ctx['startccol'], matches, True)
 
-source = Source(vim)
-on_complete = source.on_complete
+accounts = Source(vim, 'accounts')
+
+accounts_provider = accounts.on_complete
