@@ -29,6 +29,10 @@ Documentation
 The Ledger Ncm2 source will provide completion for accounts from a
 Ledger journal file.
 
+There are four completion types provideb by Ncm2 Ledger: `accounts`,
+`tags`, `payees`, and `commodities` as well as relevant setting options
+to influence retrieving completion candidates.
+
 By default, `ledger` command with corresponding arguments is used.
 Redefine the command as a string, or an array of CLI arguments.
 For example, if you are using `hledger` either will work:
@@ -41,6 +45,18 @@ Settings
     g:ncm2_ledger_cmd_accounts
         Defines a command for retrieving accounts
         Default: ['ledger', 'accounts']
+
+    g:ncm2_ledger_cmd_tags
+        Defines a command for retrieving tags
+        Default: ['ledger', 'tags']
+
+    g:ncm2_ledger_cmd_payees
+        Defines a command for retrieving payees
+        Default: ['ledger', 'payees']
+
+    g:ncm2_ledger_cmd_commodities
+        Defines a command for retrieving commodities
+        Default: ['ledger', 'commodities']
 
 
 Contributing

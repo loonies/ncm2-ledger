@@ -67,5 +67,11 @@ class Source(Ncm2Source):
         self.complete(ctx, ctx['startccol'], matches, True)
 
 accounts = Source(vim, 'accounts')
+tags = Source(vim, 'tags')
+payees = Source(vim, 'payees')
+commodities = Source(vim, 'commodities')
 
 accounts_provider = accounts.on_complete
+tags_provider = tags.on_complete
+payees_provider = payees.on_complete
+commodities_provider = commodities.on_complete
