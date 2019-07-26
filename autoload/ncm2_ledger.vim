@@ -14,9 +14,7 @@ let g:ncm2_ledger#accounts_source = extend(
     \ 'scope': ['ledger'],
     \ 'ready': 0,
     \ 'priority': 9,
-    \ 'complete_length': -1,
-    \ 'complete_pattern': ['^ {4}'],
-    \ 'word_pattern': '\S+',
+    \ 'word_pattern': '(?<=^ {4})(\w|[^-])[: \w]*',
     \ 'on_warmup': 'ncm2_ledger#on_warmup',
     \ 'on_complete': 'ncm2_ledger#on_complete_accounts',
 \ }, 'keep')
@@ -44,7 +42,7 @@ let g:ncm2_ledger#payees_source = extend(
     \ 'priority': 9,
     \ 'complete_length': -1,
     \ 'complete_pattern': '; Payee: ',
-    \ 'word_pattern': '\S+',
+    \ 'word_pattern': '(?<=; Payee: ).+',
     \ 'on_warmup': 'ncm2_ledger#on_warmup',
     \ 'on_complete': 'ncm2_ledger#on_complete_payees',
 \ }, 'keep')
@@ -57,8 +55,8 @@ let g:ncm2_ledger#commodities_source = extend(
     \ 'ready': 0,
     \ 'priority': 9,
     \ 'complete_length': -1,
-    \ 'complete_pattern': ' {2,}(\d+\.)?\d+ ',
-    \ 'word_pattern': '(?: )[^0-9\.,//@]+',
+    \ 'complete_pattern': ' {2,}-?(\d+\.)?\d+ ',
+    \ 'word_pattern': '(?<= )[^0-9\.,//@]+',
     \ 'on_warmup': 'ncm2_ledger#on_warmup',
     \ 'on_complete': 'ncm2_ledger#on_complete_commodities',
 \ }, 'keep')
