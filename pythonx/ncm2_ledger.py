@@ -1,4 +1,5 @@
 import subprocess
+from subprocess import TimeoutExpired
 
 from pynvim.api.nvim import NvimError
 
