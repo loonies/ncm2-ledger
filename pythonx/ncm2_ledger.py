@@ -18,6 +18,7 @@ class Source(Ncm2Source):
         'payees': ['ledger', 'payees'],
         'commodities': ['ledger', 'commodities']
     }
+    DEFAULT_OPT_FILE = '--file'
 
     def __init__(self, nvim, name):
         super().__init__(nvim)
@@ -32,15 +33,23 @@ class Source(Ncm2Source):
         except NvimError:
             self.command = Source.DEFUALT_COMMANDS[name]
 
+        try:
+            self.optfile = self.nvim.eval('g:ncm2_ledger_opt_file')
+        except NvimError:
+            self.optfile = self.DEFAULT_OPT_FILE
+
         logger.debug('"%s" command is: %s', name, self.command)
 
     def on_complete(self, ctx):
         base = ctx['base']
+        filepath = ctx['filepath']
         matcher = self.matcher_get(ctx)
 
         try:
+            command = self.command + [self.optfile, filepath]
+
             proc = Popen(
-                args=self.command,
+                args=command,
                 stdin=subprocess.PIPE,
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE

@@ -34,13 +34,17 @@ There are four completion types provideb by Ncm2 Ledger: `accounts`,
 to influence retrieving completion candidates.
 
 By default, `ledger` command with corresponding arguments is used.
-Redefine the command as a string, or an array of CLI arguments.
-For example, if you are using `hledger` either will work:
+Redefine the command as an array of CLI arguments.
+For example, if you are using `hledger`:
 
-    let g:ncm2_ledger_cmd_accounts = 'hledger accounts'
     let g:ncm2_ledger_cmd_accounts = ['hledger', 'accounts']
 
 Settings
+
+    g:ncm2_ledger_opt_file
+        Defines a file option name. Edited file is passed to this
+        option as an argument.
+        Default: --file
 
     g:ncm2_ledger_cmd_accounts
         Defines a command for retrieving accounts
