@@ -44,22 +44,27 @@ Settings
     g:ncm2_ledger_opt_file
         Defines a file option name. Edited file is passed to this
         option as an argument.
+        Type: String
         Default: --file
 
     g:ncm2_ledger_cmd_accounts
         Defines a command for retrieving accounts
+        Type: List
         Default: ['ledger', 'accounts']
 
     g:ncm2_ledger_cmd_tags
         Defines a command for retrieving tags
+        Type: List
         Default: ['ledger', 'tags']
 
     g:ncm2_ledger_cmd_payees
         Defines a command for retrieving payees
+        Type: List
         Default: ['ledger', 'payees']
 
     g:ncm2_ledger_cmd_commodities
         Defines a command for retrieving commodities
+        Type: List
         Default: ['ledger', 'commodities']
 
 
