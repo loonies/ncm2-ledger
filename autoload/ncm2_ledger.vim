@@ -14,7 +14,7 @@ let g:ncm2_ledger#accounts_source = extend(
     \ 'scope': ['ledger'],
     \ 'ready': 0,
     \ 'priority': 9,
-    \ 'word_pattern': '(?<=^ {4})(\w|[^-])[: \w]*',
+    \ 'word_pattern': '((?<=^ {4})|(?<=^ {4}\[)|(?<=^ {4}\())[a-zA-Z0-9 ][: \w]*',
     \ 'on_warmup': 'ncm2_ledger#on_warmup',
     \ 'on_complete': 'ncm2_ledger#on_complete_accounts',
 \ }, 'keep')
