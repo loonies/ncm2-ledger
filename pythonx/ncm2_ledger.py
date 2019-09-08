@@ -10,6 +10,9 @@ from ncm2 import getLogger
 
 logger = getLogger(__name__)
 
+class SourceException(Exception):
+    pass
+
 class Source(Ncm2Source):
     PROC_TIMEOUT = 5
     DEFUALT_COMMANDS = {
@@ -56,6 +59,9 @@ class Source(Ncm2Source):
             )
             outs, errs = proc.communicate(timeout=Source.PROC_TIMEOUT)
 
+            if errs:
+                raise SourceException(errs.decode('utf-8'))
+
             candidates = outs.decode('utf-8').splitlines()
             candidates = self.matches_formalize(ctx, candidates)
 
@@ -64,6 +70,9 @@ class Source(Ncm2Source):
                 logger.info('Found %s "%s" completion candidates',
                     len(self.candidates), self.name
                 )
+        except SourceException as err:
+            logger.error('Error collecting "%s" candidates', self.name)
+            logger.error(err)
         except TimeoutExpired as err:
             proc.kill()
             logger.exception('Error collecting "%s" candidates', self.name)
