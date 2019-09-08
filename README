@@ -67,6 +67,9 @@ Settings
         Type: List
         Default: ['ledger', 'commodities']
 
+Note that in case of journal file parsing errors (e.g. unbalanced
+transaction), previously cached candidates are returned, if any.
+
 
 Contributing
 ------------
