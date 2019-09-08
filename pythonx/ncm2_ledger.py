@@ -38,7 +38,7 @@ class Source(Ncm2Source):
         except NvimError:
             self.optfile = self.DEFAULT_OPT_FILE
 
-        logger.debug('"%s" command is: %s', name, self.command)
+        logger.debug('Command for "%s" candidates is: %s', name, ' '.join(self.command))
 
     def on_complete(self, ctx):
         base = ctx['base']
@@ -66,9 +66,9 @@ class Source(Ncm2Source):
                 )
         except TimeoutExpired as err:
             proc.kill()
-            logger.exception('Error collecting "%s" matches', self.name)
+            logger.exception('Error collecting "%s" candidates', self.name)
         except Exception as err:
-            logger.exception('Error collecting "%s" matches', self.name)
+            logger.exception('Error collecting "%s" candidates', self.name)
 
         matches = [candidate for candidate in self.candidates if matcher(base, candidate)]
         logger.info('Found %s "%s" completion matches',
