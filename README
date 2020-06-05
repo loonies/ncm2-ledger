@@ -29,7 +29,7 @@ Documentation
 The Ledger Ncm2 source will provide completion for accounts from a
 Ledger journal file.
 
-There are four completion types provideb by Ncm2 Ledger: `accounts`,
+There are four completion types provided by Ncm2 Ledger: `accounts`,
 `tags`, `payees`, and `commodities` as well as relevant setting options
 to influence retrieving completion candidates.
 
